@@ -1,7 +1,7 @@
 {
     "name": "laraviet/backpack2fa",
     "description": "Apply Google Authenticator to Laravel Backpack project",
-    "license": "license",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Nguyen Trung Thanh",
