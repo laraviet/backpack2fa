@@ -1,5 +1,11 @@
 # Backpack2FA
 
+Apply Google Authenticator to Laravel Backpack project
+
+## Prerequisite
+
+Need to install Backpack to your Laravel project first following [this instruction](https://backpackforlaravel.com/docs/3.5/installation)
+
 ## Installation
 
 Via Composer
