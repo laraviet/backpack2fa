@@ -1,12 +1,5 @@
 # Backpack2FA
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
-
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
-
 ## Installation
 
 Via Composer
@@ -15,43 +8,58 @@ Via Composer
 $ composer require laraviet/backpack2fa
 ```
 
-## Usage
+## Setup
 
-## Change log
+```
+php artisan migrate
+php artisan vendor:publish --provider=PragmaRX\\Google2FALaravel\\ServiceProvider
 
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
 ```
 
-## Contributing
+**Edit `config\auth.php`**
 
-Please see [contributing.md](contributing.md) for details and a todolist.
+from
 
-## Security
+```
+'guard' => 'web',
+```
 
-If you discover any security related issues, please email author email instead of using the issue tracker.
+to
 
-## Credits
+```
+'guard' => 'backpack',
+```
 
-- [author name][link-author]
-- [All Contributors][link-contributors]
+**Edit `config\google2fa.php`**
 
-## License
+from
 
-license. Please see the [license file](license.md) for more information.
+```
+'view' => 'google2fa.index',
+```
 
-[ico-version]: https://img.shields.io/packagist/v/laraviet/backpack2fa.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/laraviet/backpack2fa.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/laraviet/backpack2fa/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+to
 
-[link-packagist]: https://packagist.org/packages/laraviet/backpack2fa
-[link-downloads]: https://packagist.org/packages/laraviet/backpack2fa
-[link-travis]: https://travis-ci.org/laraviet/backpack2fa
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/laraviet
-[link-contributors]: ../../contributors]
+```
+'view' => 'backpack2fa::index',
+```
+
+**Edit `app\User.php`**
+
+add `'google2fa_secret'` to `$fillable` and `$hidden`
+
+add 2 more methods:
+
+```
+public function setGoogle2faSecretAttribute($value)
+{
+     $this->attributes['google2fa_secret'] = encrypt($value);
+}
+```
+
+```
+public function getGoogle2faSecretAttribute($value)
+{
+    return decrypt($value);
+}
+```
