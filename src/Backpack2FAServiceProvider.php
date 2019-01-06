@@ -14,8 +14,8 @@ class Backpack2FAServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'backpack2fa');
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'backpack2fa');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         /*
         |--------------------------------------------------------------------------
@@ -32,7 +32,6 @@ class Backpack2FAServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/backpack2fa.php', 'backpack2fa');
         $this->app['router']->aliasMiddleware('2fa', \PragmaRX\Google2FALaravel\Middleware::class);
     }
 
